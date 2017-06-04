@@ -103,16 +103,23 @@
 	    IndexRoute = _require.IndexRoute,
 	    hashHistory = _require.hashHistory;
 	
-	var Main = __webpack_require__(223);
+	var Countdown = __webpack_require__(223);
+	var Timer = __webpack_require__(224);
+	var Main = __webpack_require__(225);
 	//Load foundation
-	__webpack_require__(225);
+	__webpack_require__(227);
 	$(document).foundation();
 	//Add app.css
-	__webpack_require__(229);
+	__webpack_require__(231);
 	ReactDOM.render(React.createElement(
 	  Router,
 	  { history: hashHistory },
-	  React.createElement(Route, { path: '/', component: Main })
+	  React.createElement(
+	    Route,
+	    { path: '/', component: Main },
+	    React.createElement(Route, { path: 'countdown', component: Countdown }),
+	    React.createElement(IndexRoute, { component: Timer })
+	  )
 	), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
@@ -24903,7 +24910,52 @@
 	'use strict';
 	
 	var React = __webpack_require__(8);
-	var Navigation = __webpack_require__(224);
+	
+	var Countdown = React.createClass({
+	  displayName: 'Countdown',
+	
+	  render: function render() {
+	    return React.createElement(
+	      'p',
+	      null,
+	      'Countdown.jsx'
+	    );
+	  }
+	});
+	
+	module.exports = Countdown;
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(8);
+	
+	var Timer = React.createClass({
+	  displayName: 'Timer',
+	
+	  render: function render() {
+	    return React.createElement(
+	      'p',
+	      null,
+	      'Timer.jsx'
+	    );
+	  }
+	});
+	
+	module.exports = Timer;
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(8);
+	var Navigation = __webpack_require__(226);
+	
 	var Main = function Main(props) {
 	  return React.createElement(
 	    'div',
@@ -24925,10 +24977,11 @@
 	    )
 	  );
 	};
+	
 	module.exports = Main;
 
 /***/ },
-/* 224 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24939,78 +24992,75 @@
 	    Link = _require.Link,
 	    IndexLink = _require.IndexLink;
 	
-	var Navigation = React.createClass({
-	  displayName: 'Navigation',
-	
-	  render: function render() {
-	    return React.createElement(
+	var Navigation = function Navigation() {
+	  return React.createElement(
+	    'div',
+	    { className: 'top-bar' },
+	    React.createElement(
 	      'div',
-	      { className: 'top-bar' },
+	      { className: 'top-bar-left' },
 	      React.createElement(
-	        'div',
-	        { className: 'top-bar-left' },
+	        'ul',
+	        { className: 'menu' },
 	        React.createElement(
-	          'ul',
-	          { className: 'menu' },
+	          'li',
+	          { className: 'menu-text' },
+	          'React Timer App'
+	        ),
+	        React.createElement(
+	          'li',
+	          null,
 	          React.createElement(
-	            'li',
-	            { className: 'menu-text' },
-	            'React Timer App'
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              Link,
-	              { to: '/', activeClassName: 'active-link' },
-	              'Timer'
-	            )
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              Link,
-	              { to: '/', activeClassName: 'active-link' },
-	              'Countdown'
-	            )
+	            IndexLink,
+	            { to: '/', activeClassName: 'active-link' },
+	            'Timer'
 	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'top-bar-right' },
+	        ),
 	        React.createElement(
-	          'ul',
-	          { className: 'menu' },
+	          'li',
+	          null,
 	          React.createElement(
-	            'li',
-	            { className: 'menu-text' },
-	            'Created by ',
-	            React.createElement(
-	              'a',
-	              { href: '#' },
-	              'Kazim Hussain'
-	            )
+	            Link,
+	            { to: '/countdown', activeClassName: 'active-link' },
+	            'Countdown'
 	          )
 	        )
 	      )
-	    );
-	  }
-	});
+	    ),
+	    React.createElement(
+	      'div',
+	      { className: 'top-bar-right' },
+	      React.createElement(
+	        'ul',
+	        { className: 'menu' },
+	        React.createElement(
+	          'li',
+	          { className: 'menu-text' },
+	          'Created by ',
+	          React.createElement(
+	            'a',
+	            { href: 'http://www.mead.io', target: '_blank' },
+	            'Andrew Mead'
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+	
 	module.exports = Navigation;
 
 /***/ },
-/* 225 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(226);
+	var content = __webpack_require__(228);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(228)(content, {});
+	var update = __webpack_require__(230)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -25027,10 +25077,10 @@
 	}
 
 /***/ },
-/* 226 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(227)();
+	exports = module.exports = __webpack_require__(229)();
 	// imports
 	
 	
@@ -25041,7 +25091,7 @@
 
 
 /***/ },
-/* 227 */
+/* 229 */
 /***/ function(module, exports) {
 
 	/*
@@ -25097,7 +25147,7 @@
 
 
 /***/ },
-/* 228 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -25351,16 +25401,16 @@
 
 
 /***/ },
-/* 229 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(230);
+	var content = __webpack_require__(232);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(228)(content, {});
+	var update = __webpack_require__(230)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -25377,15 +25427,15 @@
 	}
 
 /***/ },
-/* 230 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(227)();
+	exports = module.exports = __webpack_require__(229)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".top-bar, .top-bar ul {\n  background-color: #333333; }\n\n.top-bar .menu-text {\n  color: white; }\n\n.top-bar .menu > .menu-text > a {\n  display: inline;\n  padding: 0; }\n", ""]);
+	exports.push([module.id, ".top-bar, .top-bar ul {\n  background-color: #333333; }\n\n.top-bar .menu-text {\n  color: white; }\n\n.top-bar .menu > .menu-text > a {\n  display: inline;\n  padding: 0; }\n\n.top-bar .active-link {\n  font-weight: bold; }\n", ""]);
 	
 	// exports
 
